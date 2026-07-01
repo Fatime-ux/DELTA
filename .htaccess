@@ -1,0 +1,30 @@
+Options -Indexes
+DirectoryIndex index.php
+
+# Redirection URL propre
+RewriteEngine On
+RewriteBase /DELTA/
+
+# Redirections
+RewriteRule ^$ index.php [L]
+RewriteRule ^login$ login.php [L]
+RewriteRule ^dashboard$ dashboard.php [L]
+RewriteRule ^missions$ missions.php [L]
+RewriteRule ^workpapers$ workpapers.php [L]
+RewriteRule ^reports$ reports.php [L]
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(sql|log|htaccess|htpasswd)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Cache
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico)$">
+    Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# PHP Settings
+php_value upload_max_filesize 20M
+php_value post_max_size 20M
+php_value max_execution_time 300
